@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="250px"
+    android:layout_gravity="center_vertical"
+    android:minHeight="250px">
+    <LinearLayout
+        android:layout_width="3840.5dp"
+        android:layout_height="5540.5dp"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginBottom="0.0dp">
+        <TextView
+            android:layout_width="165.0dp"
+            android:layout_height="27.5dp"
+            android:text="连接状态：无连接"
+            android:id="@+id/textView1" />
+        <TextView
+            android:layout_width="165.5dp"
+            android:layout_height="27.5dp"
+            android:text="wifi名字:"
+            android:id="@+id/textView2"
+            android:layout_marginRight="0.0dp"
+            android:layout_marginLeft="0.0dp" />
+        <TextView
+            android:layout_width="165.0dp"
+            android:layout_height="wrap_content"
+            android:text="0级信号，0 kb"
+            android:id="@+id/textView3" />
+        <Button
+            android:layout_width="190.0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/button1"
+            android:text="点击时连接"
+            android:layout_marginTop="500px"
+            
+         />
+
+    </LinearLayout>
+    
+</RelativeLayout>
