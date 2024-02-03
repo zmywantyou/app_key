@@ -50,7 +50,7 @@ class WifiSwich : wifi
     }
     public void show_update_textview3(ref TextView textView3)
     {
-        textView3.Text = this.Leve + "dB" + "   " + this.speed + "kb";//wifiÀ¸µÄwifiĞÅºÅºÍËÙ¶È
+        textView3.Text = this.Leve + "dB" + "   " + this.speed + "kb";//wifiæ çš„wifiä¿¡å·å’Œé€Ÿåº¦
 
     }
     public  void ChangeWifi()
@@ -65,41 +65,64 @@ class WifiSwich : wifi
         
     }
 
-    private String ComperWifi()
-    {
+    public  void ChangeWifi()
+  {
+      if (wifi.NOin==1) 
+      {
+          if(this.Leve>=100) 
+          {
+              base.close_or_open_wifi();
+          }
+      }
+      
+  }
+
+  private String ComperWifi()
+  {
 
 
 
 
-        bool su = this.wifiManager.StartScan();
+      bool su = this.wifiManager.StartScan();
 
 
-        //  this.WifiUser.Clear();
-        this.WifiUser = this.wifiManager.ScanResults;
+      //  this.WifiUser.Clear();
+      this.WifiUser = this.wifiManager.ScanResults;
 
-        GetWifiUser();
+      GetWifiUser();
 
-        int leve = -100;
-        String ssid = su.ToString();
+      int leve = -100;
+      int leve5G = -100;
+      String ssid = su.ToString();
+      String ssid5G = su.ToString();
+      bool ON= false;
 
-        foreach (var result in this.WifiUser)
-        {
-
-            if (result.Ssid.ToString().Length > 3)
-                //if (result.Ssid.ToString().Substring(ssid.Length-4, 3).Equals("_5G"))
-                if (result.Level > -78)
-                    return result.Ssid.ToString();
-            if (result.Level >= leve)
-            {
-                leve = result.Level;
-                ssid = result.Ssid.ToString();
-            }
-
-        }
-
-        return ssid;
-
-    }
+      foreach (var result in this.WifiUser)
+      {
+          bool is5G = result.Ssid.ToString().EndsWith("5G");
+          if (is5G && result.Level > -70)
+          {
+              if (result.Level > leve5G)
+              {
+                  leve5G = result.Level;
+                  ssid5G = result.Ssid.ToString();
+                   ON = true;
+              }
+          }
+          else
+          {
+              if (result.Level > leve)
+              {
+                  leve = result.Level;
+                  ssid = result.Ssid.ToString();
+              }
+          }
+      }
+      if (ON)
+          return ssid5G;
+      else 
+          return ssid;
+  }
     public void GetWifiUser()
     {
         String Bed = "zmy";
@@ -145,10 +168,10 @@ class WifiSwich : wifi
         {
            if(ssid2!= SSID1)
             {
-                wifi.text2_state = "µ±Ç°Ë½ÈËWiFi£º" + SSID1;
+                wifi.text2_state = "å½“å‰ç§äººWiFiï¼š" + SSID1;
                 //if(MainActivity.UpOn)
                 // {
-                //wifi.b_state = "µã»÷¿ªÊ¼Á¬½Ó";
+                //wifi.b_state = "ç‚¹å‡»å¼€å§‹è¿æ¥";
                 wifi.Get_ssid_pwd(ComperWifi(), WifiPassWord(ComperWifi()));
 
 
